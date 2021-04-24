@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PeliculasPDM</string>
+    <string name="mensajebienvenida">Welcome!</string>
+    <string name="asistente">Do you want the voice assistance?</string>
+    <string name="descripcion">This is an app where you could get a random movie giving a few information</string>
+    <string name="si">yes</string>
+    <string name="no">no</string>
+    <string name="inicionoasistente">Let\'s start, what era would you like to see the movie from?</string>
+    <string name="peliantigua">I want a classic (20s-50s years)</string>
+    <string name="pelimasmoderna">A coloured classic (60s-80s years)</string>
+    <string name="pelimoderna">Something actual(90s-)</string>
+    <string name="textogenero">Then choose a genre</string>
+</resources>

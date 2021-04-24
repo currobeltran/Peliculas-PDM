@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PeliculasPDM</string>
+    <string name="mensajebienvenida">¡Bienvenido!</string>
+    <string name="asistente">¿Desea utilizar el asistente de voz?</string>
+    <string name="descripcion">Esta es una aplicación donde podrá obtener una película aleatoria dando alguna información</string>
+    <string name="si">si</string>
+    <string name="no">no</string>
+    <string name="inicionoasistente">Empezemos, ¿de qué época te gustaría ver la película?</string>
+    <string name="peliantigua">Un clásico (años 20-50)</string>
+    <string name="pelimasmoderna">Un clásico a color (años 60-80)</string>
+    <string name="pelimoderna">Algo actual (años 90-)</string>
+    <string name="textogenero">A continuación, elija un género</string>
+</resources>
