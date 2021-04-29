@@ -11,4 +11,6 @@
     <string name="pelimasmoderna">Un clásico a color (años 60-80)</string>
     <string name="pelimoderna">Algo actual (años 90-)</string>
     <string name="textogenero">A continuación, elija un género</string>
+    <string name="seleccionpelis">Estas son algunas películas relacionadas</string>
+    <string name="descripcioncartas">Deslice a la derecha si le gustó, o a la izquierda si no la conoce o no le gustó</string>
 </resources>
