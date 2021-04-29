@@ -13,4 +13,7 @@
     <string name="textogenero">Then choose a genre</string>
     <string name="seleccionpelis">These are some related movies</string>
     <string name="descripcioncartas">Swipe right if you liked it, or left if you don\'t know or don\'t like it</string>
+    <string name="credenciales">Enter your TheMovieDB credentials to login</string>
+    <string name="nombreusuario">Name</string>
+    <string name="iniciosesionboton">Log in</string>
 </resources>

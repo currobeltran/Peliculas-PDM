@@ -13,4 +13,7 @@
     <string name="textogenero">A continuación, elija un género</string>
     <string name="seleccionpelis">Estas son algunas películas relacionadas</string>
     <string name="descripcioncartas">Deslice a la derecha si le gustó, o a la izquierda si no la conoce o no le gustó</string>
+    <string name="credenciales">Introduzca sus credenciales de TheMovieDB para iniciar sesión</string>
+    <string name="nombreusuario">Nombre</string>
+    <string name="iniciosesionboton">Iniciar sesión</string>
 </resources>

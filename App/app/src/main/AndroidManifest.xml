@@ -11,16 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PeliculasPDM">
-        <activity android:name=".PeliculasRelacionadas"></activity>
-        <activity android:name=".SeleccionGenero" />
-        <activity android:name=".InicioNoAsistente" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".InicioSesion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".PeliculasRelacionadas" />
+        <activity android:name=".SeleccionGenero" />
+        <activity android:name=".InicioNoAsistente" />
+        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
