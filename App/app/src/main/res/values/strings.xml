@@ -16,4 +16,5 @@
     <string name="credenciales">Enter your TheMovieDB credentials to login</string>
     <string name="nombreusuario">Name</string>
     <string name="iniciosesionboton">Log in</string>
+    <string name="titulocarrusel">Esto te podría gustar...</string>
 </resources>
