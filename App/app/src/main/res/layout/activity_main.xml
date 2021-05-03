@@ -23,8 +23,8 @@
 
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
-        android:layout_width="275dp"
-        android:layout_height="348dp"
+        android:layout_width="247dp"
+        android:layout_height="318dp"
         android:layout_marginTop="16dp"
         app:fillColor="#FFFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,26 +36,11 @@
         app:strokeColor="#FF777777"
         app:strokeWidth="1dp" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="372dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/catamaran_medium"
-        android:gravity="center"
-        android:text="@string/mensajebienvenida"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carouselView" />
-
     <Button
         android:id="@+id/button"
         android:layout_width="259dp"
         android:layout_height="43dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/catamaran_medium"
         android:onClick="siAsistente"
         android:text="@string/si"
@@ -70,7 +55,7 @@
         android:id="@+id/button2"
         android:layout_width="256dp"
         android:layout_height="46dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/catamaran_medium"
         android:onClick="noAsistente"
         android:text="@string/no"
@@ -78,8 +63,37 @@
         android:textStyle="bold"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="252dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:onClick="valorarPelicula"
+        android:text="@string/valorarpeli"
+        android:textStyle="bold"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carouselView" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="291dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center"
+        android:text="@string/otrasopciones"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

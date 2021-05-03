@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ValorarPelicula">
+
+    <Button
+        android:id="@+id/button10"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="49dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:gravity="start"
+        android:onClick="volverAtras"
+        app:icon="@drawable/abc_vector_test"
+        app:iconPadding="0dp"
+        app:iconTint="#00796B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="372dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center"
+        android:text="@string/titulocarrusel"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/posterPeli"
+        android:layout_width="209dp"
+        android:layout_height="258dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/sinopsis"
+        android:layout_width="370dp"
+        android:layout_height="190dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center_horizontal"
+        android:text="@string/titulocarrusel"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/posterPeli" />
+
+    <Button
+        android:id="@+id/botonNoMG"
+        android:layout_width="53dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginLeft="112dp"
+        android:layout_marginTop="20dp"
+        android:onClick="valoracionPelicula"
+        app:backgroundTint="@color/teal_700"
+        app:icon="@drawable/thumbdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sinopsis" />
+
+    <Button
+        android:id="@+id/botonMG"
+        android:layout_width="52dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
+        android:gravity="center"
+        android:onClick="valoracionPelicula"
+        app:backgroundTint="@color/teal_700"
+        app:icon="@drawable/thumbup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sinopsis" />
+</androidx.constraintlayout.widget.ConstraintLayout>

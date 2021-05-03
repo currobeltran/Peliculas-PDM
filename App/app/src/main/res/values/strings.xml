@@ -17,4 +17,26 @@
     <string name="nombreusuario">Name</string>
     <string name="iniciosesionboton">Log in</string>
     <string name="titulocarrusel">Esto te podría gustar...</string>
+    <string name="valorarpeli">Valorar Película</string>
+    <string name="otrasopciones">Si no también puede...</string>
+    <string name="title_activity_obtener_recomendacion">ObtenerRecomendacion</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="opciones">Elija una época y un género de los siguientes</string>
+    <string name="epoca">Épocas</string>
+    <string name="generos">Géneros</string>
+    <string name="drama">Drama</string>
+    <string name="comedia">Comedia</string>
+    <string name="thriller">Thriller</string>
+    <string name="accion">Acción</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="documental">Documental</string>
+    <string name="terror">Terror</string>
+    <string name="western">Western</string>
 </resources>

@@ -17,4 +17,15 @@
     <string name="nombreusuario">Nombre</string>
     <string name="iniciosesionboton">Iniciar sesión</string>
     <string name="titulocarrusel">Esto te podría gustar...</string>
+    <string name="valorarpeli">Valorar Película</string>
+    <string name="opciones">Elija una época y un género de los siguientes</string>
+    <string name="epoca">Épocas</string>
+    <string name="generos">Géneros</string>
+    <string name="drama">Drama</string>
+    <string name="comedia">Comedia</string>
+    <string name="accion">Acción</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="documental">Documental</string>
+    <string name="terror">Terror</string>
+    <string name="western">Western</string>
 </resources>
