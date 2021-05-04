@@ -1,6 +1,12 @@
 package com.example.peliculaspdm
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.Sensor.TYPE_ACCELEROMETER
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,10 +18,11 @@ import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
-import java.util.*
+import kotlin.math.abs
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), SensorEventListener {
     var idsesion: String = ""
     var requestToken: String = ""
     var pelisRecomendadas: String = ""
@@ -26,12 +33,21 @@ class MainActivity : AppCompatActivity() {
     var infousuario: String = ""
     var idlista: Int = -1
     var pelisFavoritas: String = ""
-
     var vectorPelisRecomendadasDefinitivas = arrayListOf(JSONObject(),
-        JSONObject(),
-        JSONObject(),
-        JSONObject())
+            JSONObject(),
+            JSONObject(),
+            JSONObject())
 
+    //Variables para el acelerómetro
+    var sensorManager: SensorManager? = null
+    var sensor: Sensor? = null
+    var lastUpdate: Long = 0
+    var last_x = 0f
+    var last_y = 0f
+    var last_z = 0f
+    val SHAKE_THRESHOLD = 3000
+
+    //Variable para el carrusel de posters de peliculas
     var imageListener: ImageListener = ImageListener { position, imageView ->
         val idPeli = vectorPelisRecomendadasDefinitivas[position].getInt("id")
 
@@ -40,25 +56,25 @@ class MainActivity : AppCompatActivity() {
         var filepath = ""
         when (position) {
             0 -> {
-                while (filepath1 == ""){
+                while (filepath1 == "") {
 
                 }
                 filepath = filepath1
             }
             1 -> {
-                while (filepath2 == ""){
+                while (filepath2 == "") {
 
                 }
                 filepath = filepath2
             }
             2 -> {
-                while (filepath3 == ""){
+                while (filepath3 == "") {
 
                 }
                 filepath = filepath3
             }
             3 -> {
-                while (filepath4 == ""){
+                while (filepath4 == "") {
 
                 }
                 filepath = filepath4
@@ -73,6 +89,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensor = sensorManager!!.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
+        sensorManager!!.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+
         requestToken = intent.getStringExtra("RequestToken")!!
         peticionIdSesion()
 
@@ -111,7 +132,6 @@ class MainActivity : AppCompatActivity() {
 
     fun siAsistente(view: View){
 
-
     }
 
     fun valorarPelicula(view: View){
@@ -119,22 +139,22 @@ class MainActivity : AppCompatActivity() {
         val intentValorarPeli = Intent(this, ValorarPelicula::class.java)
 
         when(carouselView.currentItem){
-            0 ->{
+            0 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[0]
                 intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
                 intentValorarPeli.putExtra("IMAGEN", filepath1)
             }
-            1 ->{
+            1 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[1]
                 intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
                 intentValorarPeli.putExtra("IMAGEN", filepath2)
             }
-            2 ->{
+            2 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[2]
                 intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
                 intentValorarPeli.putExtra("IMAGEN", filepath3)
             }
-            3 ->{
+            3 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[3]
                 intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
                 intentValorarPeli.putExtra("IMAGEN", filepath4)
@@ -157,7 +177,7 @@ class MainActivity : AppCompatActivity() {
 
         val request = Request.Builder()
             .url("https://api.themoviedb.org/3/authentication/session/new?api_key=ecfe4f06a0f028c3618838df92bfea77")
-            .method("POST",requestBody)
+            .method("POST", requestBody)
             .build()
         val cliente = OkHttpClient()
 
@@ -175,7 +195,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call?, response: Response) {
                     val res = JSONObject(response.body()!!.string())
 
-                    if(res.getBoolean("success")){
+                    if (res.getBoolean("success")) {
                         idsesion = res.getString("session_id")
                         Log.i("IDSESION", idsesion)
                     }
@@ -214,7 +234,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val jsonArrayFavoritas = JSONArray(pelisFavoritas)
-        val random = Random(0)
+        val random = Random(System.currentTimeMillis())
         val peliAleatoria = random.nextInt(0, jsonArrayFavoritas.length())
 
         val peliElegida = jsonArrayFavoritas.getJSONObject(peliAleatoria)
@@ -263,7 +283,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call?, response: Response) {
                     val res = JSONObject(response.body()!!.string()).getJSONArray("posters")
                     Log.i("FILEPATH", res.getJSONObject(0).getString("file_path"))
-                    when(position){
+                    when (position) {
                         0 -> filepath1 = res.getJSONObject(0).getString("file_path")
 
                         1 -> filepath2 = res.getJSONObject(0).getString("file_path")
@@ -298,4 +318,44 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
     }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        if(event!!.sensor.type == TYPE_ACCELEROMETER){
+            val x = event.values[0]
+            val y = event.values[1]
+            val z = event.values[2]
+
+            val curTime = System.currentTimeMillis()
+
+            if (curTime - lastUpdate > 100) {
+                val diffTime = curTime - lastUpdate
+                lastUpdate = curTime
+
+                val speed = abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000
+
+                if (speed > SHAKE_THRESHOLD) {
+                    Log.i("MOVIMIENTO", "SI $speed")
+                }
+
+                last_x = x
+                last_y = y
+                last_z = z
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        sensorManager!!.unregisterListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sensorManager!!.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+    }
+
 }
