@@ -11,15 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PeliculasPDM">
+        <activity android:name=".ObtenerRecomendacion2"></activity>
         <activity
             android:name=".ValorarPelicula"
-            android:parentActivityName=".MainActivity"
-        />
-        <activity
-            android:name=".ObtenerRecomendacion"
-            android:label="@string/title_activity_obtener_recomendacion"
-            android:theme="@style/Theme.PeliculasPDM.NoActionBar"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".InicioSesion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +24,7 @@
         </activity>
         <activity
             android:name=".PeliculasRelacionadas"
-            android:parentActivityName=".ObtenerRecomendacion"
-        />
+            android:parentActivityName=".ObtenerRecomendacion2" />
         <activity android:name=".SeleccionGenero" />
         <activity android:name=".InicioNoAsistente" />
         <activity android:name=".MainActivity" />

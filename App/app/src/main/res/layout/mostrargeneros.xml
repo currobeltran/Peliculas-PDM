@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="330dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:onClick="botonParametroPulsado"
+        android:text="@string/ocultar"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/groupcheckgeneros"
+        android:layout_width="327dp"
+        android:layout_height="541dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button15">
+
+        <CheckBox
+            android:id="@+id/checkdrama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/drama" />
+
+        <CheckBox
+            android:id="@+id/checkaccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accion" />
+
+        <CheckBox
+            android:id="@+id/checkcomedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/comedia" />
+
+        <CheckBox
+            android:id="@+id/checkthriller"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/thriller" />
+
+        <CheckBox
+            android:id="@+id/checkscifi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/scifi" />
+
+        <CheckBox
+            android:id="@+id/checkdocumental"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/documental" />
+
+        <CheckBox
+            android:id="@+id/checkterror"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/terror" />
+
+        <CheckBox
+            android:id="@+id/checkwestern"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/western" />
+
+        <CheckBox
+            android:id="@+id/checkmusical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/musical" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,8 @@
     <string name="mensajebienvenida">¡Bienvenido!</string>
     <string name="asistente">¿Desea utilizar el asistente de voz?</string>
     <string name="descripcion">Esta es una aplicación donde podrá obtener una película aleatoria dando alguna información</string>
-    <string name="si">Iniciar asistente de voz</string>
-    <string name="no">Obtener recomendación</string>
+    <string name="si">Si</string>
+    <string name="no">No</string>
     <string name="inicionoasistente">Empezemos, ¿de qué época te gustaría ver la película?</string>
     <string name="peliantigua">Un clásico (años 20-50)</string>
     <string name="pelimasmoderna">Un clásico a color (años 60-80)</string>
@@ -26,6 +26,16 @@
     <string name="accion">Acción</string>
     <string name="siguiente">Siguiente</string>
     <string name="documental">Documental</string>
+    <string name="scifi">Ciencia Ficción</string>
     <string name="terror">Terror</string>
     <string name="western">Western</string>
+    <string name="puntuacionminima">Puntuación mínima</string>
+    <string name="popularidad">¿Desea una película popular?</string>
+    <string name="ocultar">Pulse para ocultar</string>
+    <string name="elijaparametros">Elija entre los siguientes parámetros las opciones de su recomendación</string>
+    <string name="buscar">Buscar</string>
+    <string name="desde">Desde</string>
+    <string name="hasta">Hasta</string>
+    <string name="volverinicio">Volver al inicio</string>
+    <string name="otrasopciones">También puede...</string>
 </resources>

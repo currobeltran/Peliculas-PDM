@@ -140,7 +140,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     fun noAsistente(view: View){
-        val intentObtenerRecomendacion = Intent(this, ObtenerRecomendacion::class.java)
+        val intentObtenerRecomendacion = Intent(this, ObtenerRecomendacion2::class.java)
+        intentObtenerRecomendacion.putExtra("IDSESION", idsesion)
+        val jsonInfoUsuario = JSONObject(infousuario)
+        val idUsuario = jsonInfoUsuario.getInt("id")
+        intentObtenerRecomendacion.putExtra("IDCUENTA", idUsuario.toString())
+        intentObtenerRecomendacion.putExtra("TOKEN", requestToken)
 
         startActivity(intentObtenerRecomendacion)
     }

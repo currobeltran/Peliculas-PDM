@@ -26,7 +26,7 @@ class Adaptador : BaseCardAdapter<CardView> {
     }
 
     override fun onBindData(position: Int, cardview: View){
-        if(listaPelis == null || listaPelis.isEmpty()){
+        if(listaPelis.isEmpty()){
             return
         }
 

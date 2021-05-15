@@ -1,11 +1,6 @@
 package com.example.peliculaspdm
 
-class Pelicula {
-    var imagen: String = ""
-    var titulo: String = ""
+class Pelicula(var titulo: String, var imagen: String, idPeli: String) {
+    var id: String = idPeli
 
-    constructor(titulo: String, imagen: String){
-        this.titulo = titulo
-        this.imagen = imagen
-    }
 }
