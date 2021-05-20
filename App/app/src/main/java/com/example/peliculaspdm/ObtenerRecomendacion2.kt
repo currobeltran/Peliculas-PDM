@@ -208,6 +208,9 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
                 "Western" -> {
                     generosSolicitados += "${generosAPIJSON.getJSONObject(18).getString("id")},"
                 }
+                "Musical" -> {
+                    generosSolicitados += "${generosAPIJSON.getJSONObject(11).getString("id")},"
+                }
                 else -> {
                     generosSolicitados += ""
                 }
@@ -295,5 +298,20 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
                     }
 
                 })
+    }
+
+    fun volverAtras(v: View){
+        val activityInicio = Intent(this, MainActivity::class.java)
+
+        val idCuenta = intent.getStringExtra("IDCUENTA")
+        activityInicio.putExtra("IDCUENTA", idCuenta)
+
+        val idSesion = intent.getStringExtra("IDSESION")
+        activityInicio.putExtra("IDSESION", idSesion)
+
+        val requestToken = intent.getStringExtra("TOKEN")
+        activityInicio.putExtra("RequestToken", requestToken)
+
+        startActivity(activityInicio)
     }
 }

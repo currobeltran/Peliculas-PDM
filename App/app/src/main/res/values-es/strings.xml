@@ -16,8 +16,8 @@
     <string name="credenciales">Introduzca sus credenciales de TheMovieDB para iniciar sesión</string>
     <string name="nombreusuario">Nombre</string>
     <string name="iniciosesionboton">Iniciar sesión</string>
-    <string name="titulocarrusel">Esto te podría gustar...</string>
-    <string name="valorarpeli">Valorar Película</string>
+    <string name="titulocarrusel">Nuestra recomendación para ti</string>
+    <string name="valorarpeli">Más información</string>
     <string name="opciones">Elija una época y un género de los siguientes</string>
     <string name="epoca">Épocas</string>
     <string name="generos">Géneros</string>
@@ -38,4 +38,10 @@
     <string name="hasta">Hasta</string>
     <string name="volverinicio">Volver al inicio</string>
     <string name="otrasopciones">También puede...</string>
+    <string name="obtenerpelicula">Buscar película</string>
+    <string name="asistentevoz">Asistente de voz</string>
+    <string name="hablar">Pulse para hablar</string>
+    <string name="anadirfavoritos">Añadir a favoritos</string>
+    <string name="mispeliculas">Mis películas</string>
+    <string name="agite">Agite para ver otras</string>
 </resources>

@@ -102,10 +102,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager!!.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
 
         requestToken = intent.getStringExtra("RequestToken")!!
-        peticionIdSesion()
+        if(intent.getStringExtra("IDSESION") != null){
+            idsesion = intent.getStringExtra("IDSESION")!!
+        }
 
-        while(idsesion == ""){
+        else{
+            peticionIdSesion()
 
+            while(idsesion == ""){
+
+            }
         }
 
         peticionInformacionCuenta()
@@ -151,7 +157,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     }
 
     fun siAsistente(view: View){
-
+        val intentAsistenteDeVoz = Intent(this, AsistenteDeVoz::class.java)
+        intentAsistenteDeVoz.putExtra("IDSESION", idsesion)
+        val jsonInfoUsuario = JSONObject(infousuario)
+        val idUsuario = jsonInfoUsuario.getInt("id")
+        intentAsistenteDeVoz.putExtra("IDCUENTA", idUsuario.toString())
+        intentAsistenteDeVoz.putExtra("TOKEN", requestToken)
+        
+        startActivity(intentAsistenteDeVoz)
     }
 
     fun valorarPelicula(view: View){
@@ -186,6 +199,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val jsonInfoUsuario = JSONObject(infousuario)
         val idUsuario = jsonInfoUsuario.getInt("id")
         intentValorarPeli.putExtra("IDCUENTA", idUsuario)
+        intentValorarPeli.putExtra("TOKEN", requestToken)
 
         startActivity(intentValorarPeli)
     }

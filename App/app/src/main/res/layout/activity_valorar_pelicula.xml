@@ -62,29 +62,29 @@
         app:layout_constraintTop_toBottomOf="@+id/posterPeli" />
 
     <Button
-        android:id="@+id/botonNoMG"
-        android:layout_width="53dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginLeft="112dp"
-        android:layout_marginTop="20dp"
-        android:onClick="valoracionPelicula"
-        app:backgroundTint="@color/teal_700"
-        app:icon="@drawable/thumbdown"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sinopsis" />
-
-    <Button
         android:id="@+id/botonMG"
-        android:layout_width="52dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="112dp"
-        android:layout_marginRight="112dp"
+        android:layout_width="57dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
         android:gravity="center"
         android:onClick="valoracionPelicula"
         app:backgroundTint="@color/teal_700"
         app:icon="@drawable/thumbup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sinopsis" />
+
+    <Button
+        android:id="@+id/button17"
+        android:layout_width="56dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="28dp"
+        android:onClick="valoracionPelicula"
+        app:backgroundTint="@color/teal_700"
+        app:icon="@drawable/thumbdown"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sinopsis" />
 </androidx.constraintlayout.widget.ConstraintLayout>

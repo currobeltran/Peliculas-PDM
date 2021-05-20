@@ -6,22 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".PeliculasRelacionadas">
 
-    <Button
-        android:id="@+id/button4"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="49dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:gravity="start"
-        android:onClick="volverAtras"
-        app:icon="@drawable/abc_vector_test"
-        app:iconPadding="0dp"
-        app:iconTint="#00796B"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="335dp"

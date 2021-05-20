@@ -78,9 +78,10 @@ class PeliculasRelacionadas : AppCompatActivity() {
 
         })
 
+        Log.i("LLEGA", "2")
+
         var peliculasRelacionadas = intent.getStringExtra("PELICULAS")
         var vectorPeliculasRelacionadasJSON = JSONArray(peliculasRelacionadas)
-        Log.i("PELICULAS", peliculasRelacionadas!!)
 
         if(vectorPeliculasRelacionadasJSON.length() > 5){
             for(i in 0 until 5){
@@ -123,12 +124,6 @@ class PeliculasRelacionadas : AppCompatActivity() {
         getData()
     }
 
-    fun volverAtras(view: View){
-        val intentSeleccionGenero = Intent(this, SeleccionGenero::class.java)
-
-        startActivity(intentSeleccionGenero)
-    }
-
     fun getData(){
         var adaptador = Adaptador(listaPelis,this)
         cartas!!.setAdapter(adaptador)
@@ -158,9 +153,11 @@ class PeliculasRelacionadas : AppCompatActivity() {
     }
 
     fun volverInicio(v: View){
-        val activityInicio = Intent(this, ObtenerRecomendacion2::class.java)
+        val activityInicio = Intent(this, MainActivity::class.java)
         activityInicio.putExtra("IDCUENTA", idCuenta)
         activityInicio.putExtra("IDSESION", idSesion)
+        val requestToken = intent.getStringExtra("TOKEN")
+        activityInicio.putExtra("RequestToken", requestToken)
 
         startActivity(activityInicio)
     }

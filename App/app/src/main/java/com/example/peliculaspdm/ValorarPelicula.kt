@@ -1,5 +1,6 @@
 package com.example.peliculaspdm
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -46,9 +47,13 @@ class ValorarPelicula : AppCompatActivity() {
     }
 
     fun volverAtras(view: View){
-        val intentInicio = Intent(this, MainActivity::class.java)
+        val activityInicio = Intent(this, MainActivity::class.java)
+        activityInicio.putExtra("IDCUENTA", idCuenta)
+        activityInicio.putExtra("IDSESION", idSesion)
+        val requestToken = intent.getStringExtra("TOKEN")
+        activityInicio.putExtra("RequestToken", requestToken)
 
-        startActivity(intentInicio)
+        startActivity(activityInicio)
     }
 
     fun valoracionPelicula(view: View){
@@ -95,6 +100,15 @@ class ValorarPelicula : AppCompatActivity() {
     }
 
     fun anadePeliculaListaNoMeGusta(){
+        var dbHelper = MyDbHelper(this)
+        var sqliteBD = dbHelper.writableDatabase
 
+        var contenido = ContentValues().apply {
+            put(PeliculaContract.PeliculaEntry.COLUMN_ID, pelicula.getString("id"))
+            put(PeliculaContract.PeliculaEntry.COLUMN_NAME, pelicula.getString("title"))
+        }
+
+        var nuevaFila = sqliteBD.insert(PeliculaContract.PeliculaEntry.TABLE_NAME, null, contenido)
+        Log.i("NO ME GUSTA", nuevaFila.toString())
     }
 }

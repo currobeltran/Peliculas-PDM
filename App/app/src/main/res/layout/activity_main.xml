@@ -7,9 +7,23 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/sitegusto2"
+        android:layout_width="365dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="56dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center"
+        android:text="@string/agite"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/sitegusto"
-        android:layout_width="362dp"
-        android:layout_height="78dp"
+        android:layout_width="365dp"
+        android:layout_height="43dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center"
@@ -24,8 +38,8 @@
     <com.synnapps.carouselview.CarouselView
         android:id="@+id/carouselView"
         android:layout_width="247dp"
-        android:layout_height="318dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="321dp"
+        android:layout_marginTop="40dp"
         app:fillColor="#FFFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +57,7 @@
         android:layout_marginTop="12dp"
         android:fontFamily="@font/catamaran_medium"
         android:onClick="siAsistente"
-        android:text="@string/si"
+        android:text="@string/asistentevoz"
         android:textSize="14sp"
         android:textStyle="bold"
         app:backgroundTint="@color/teal_700"
@@ -55,17 +69,17 @@
         android:id="@+id/button2"
         android:layout_width="256dp"
         android:layout_height="46dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="76dp"
         android:fontFamily="@font/catamaran_medium"
         android:onClick="noAsistente"
-        android:text="@string/no"
+        android:text="@string/obtenerpelicula"
         android:textSize="14sp"
         android:textStyle="bold"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/mensajePeliculasFavoritas" />
 
     <Button
         android:id="@+id/button7"
@@ -91,24 +105,19 @@
         android:gravity="center"
         android:textColor="@android:color/primary_text_light"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button7"
-        app:layout_constraintVertical_bias="0.083" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="291dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="44dp"
-        android:fontFamily="@font/catamaran_medium"
-        android:gravity="center"
-        android:text="@string/otrasopciones"
-        android:textColor="@android:color/primary_text_light"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="257dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/mispeliculas"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mensajePeliculasFavoritas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
