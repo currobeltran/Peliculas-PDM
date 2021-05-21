@@ -135,14 +135,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val carouselView = findViewById<CarouselView>(R.id.carouselView)
         carouselView.pageCount = vectorPelisRecomendadasDefinitivas.size
         carouselView.setImageListener(imageListener)
-
-        val vectorPelisFavoritas = JSONArray(pelisFavoritas)
-
-        if(vectorPelisFavoritas.length() > 19){
-            var sitegustoView = findViewById<TextView>(R.id.sitegusto)
-            sitegustoView.text = "Si te gusto $nombrePeliRecomendada te gustará..."
-            sitegustoView.textSize = 18F
-        }
     }
 
     fun noAsistente(view: View){
@@ -484,12 +476,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val carouselView = findViewById<CarouselView>(R.id.carouselView)
         carouselView.pageCount = vectorPelisRecomendadasDefinitivas.size
         carouselView.setImageListener(imageListener)
+    }
 
-        val vectorPelisFavoritas = JSONArray(pelisFavoritas)
-        if(vectorPelisFavoritas.length() > 19){
-            var sitegustoView = findViewById<TextView>(R.id.sitegusto)
-            sitegustoView.text = "Si te gusto $nombrePeliRecomendada te gustará..."
-            sitegustoView.textSize = 18F
-        }
+    fun verMisPeliculas(v: View){
+
     }
 }

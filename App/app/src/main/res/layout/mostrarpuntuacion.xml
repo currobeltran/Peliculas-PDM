@@ -5,42 +5,58 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="148dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:onClick="botonParametroPulsado"
+        android:text="@android:string/ok"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sliderpuntuacion" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/sliderpuntuacion"
+        android:layout_width="345dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="32dp"
+        android:stepSize="0.1"
+        android:valueFrom="0.0"
+        android:valueTo="10.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:values="@array/initial_slider_values_anio"
+        tools:ignore="MissingConstraints" />
+
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="174dp"
-        android:layout_height="27dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/textView15"
+        android:layout_width="259dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center"
         android:text="@string/puntuacionminima"
-        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textColor="@color/black"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button14" />
-
-    <NumberPicker
-        android:id="@+id/pickerPuntuacion"
-        android:layout_width="92dp"
-        android:layout_height="121dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13">
-
-    </NumberPicker>
-
-    <Button
-        android:id="@+id/button14"
-        android:layout_width="330dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="48dp"
-        android:onClick="botonParametroPulsado"
-        android:text="@string/ocultar"
-        app:backgroundTint="@color/teal_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancelarpuntuacion"
+        android:layout_width="149dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="44dp"
+        android:onClick="botonParametroPulsado"
+        android:text="@android:string/cancel"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sliderpuntuacion" />
 </androidx.constraintlayout.widget.ConstraintLayout>

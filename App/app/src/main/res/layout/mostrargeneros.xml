@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,27 +7,26 @@
 
     <Button
         android:id="@+id/button15"
-        android:layout_width="330dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="138dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:onClick="botonParametroPulsado"
-        android:text="@string/ocultar"
+        android:text="@android:string/ok"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/groupcheckgeneros" />
 
     <LinearLayout
         android:id="@+id/groupcheckgeneros"
         android:layout_width="327dp"
         android:layout_height="541dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button15">
+        app:layout_constraintTop_toBottomOf="@+id/textView9">
 
         <CheckBox
             android:id="@+id/checkdrama"
@@ -85,5 +83,32 @@
             android:text="@string/musical" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="255dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center"
+        android:text="@string/generos"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cancelar"
+        android:layout_width="139dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="12dp"
+        android:onClick="botonParametroPulsado"
+        android:text="@android:string/cancel"
+        app:backgroundTint="@color/teal_700"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupcheckgeneros" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

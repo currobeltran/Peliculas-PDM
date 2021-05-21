@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="initial_slider_values_decadas">
+        <item>1930.0</item>
+        <item>1970.0</item>
+    </array>
+
+    <array name="initial_slider_values_anio">
+        <item>0.0</item>
+    </array>
+</resources>

@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.slider.RangeSlider
+import com.google.android.material.slider.Slider
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
@@ -18,13 +20,16 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
     var generosAPI: String? = null
     var generosSolicitados = ""
 
-    var pickerDesde: NumberPicker? = null
-    var pickerHasta: NumberPicker? = null
-    var anioDesde: Int = 1920
-    var anioHasta: Int = 1920
+    var sliderDecada: RangeSlider? = null
+    var sliderAnioDesde: Slider? = null
+    var sliderAnioHasta: Slider? = null
+    var decadaDesde: Int = 1930
+    var anioDesde: Int = 0
+    var decadaHasta: Int = 1970
+    var anioHasta: Int = 0
 
-    var pickerPuntuacion: NumberPicker? = null
-    var puntuacionMinima: Int = 0
+    var sliderPuntuacion: Slider? = null
+    var puntuacionMinima: Float = 0.0f
 
     var peliculasRecomendadas: String = ""
 
@@ -44,34 +49,26 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
 
                         val groupcheckgeneros = findViewById<LinearLayout>(R.id.groupcheckgeneros)
                         if(generos != null){
-                            generos = generos!!.removeRange(0,1)
-                            generos = generos!!.removeRange(generos!!.length-1,generos!!.length)
+                            if(generos!![0] == '['){
+                                generos = generos!!.removeRange(0,1)
+                            }
+                            if(generos!![generos!!.length-1] == ']'){
+                                generos = generos!!.removeRange(generos!!.length-1,generos!!.length)
+                            }
 
-                            var listageneros = generos!!.split(",")
+                            if(generos!!.isNotEmpty()){
+                                var listageneros = generos!!.split(",")
 
-                            for(i in 0 until groupcheckgeneros.childCount){
-                                val elemento = groupcheckgeneros.getChildAt(i) as CheckBox
+                                for(i in 0 until groupcheckgeneros.childCount){
+                                    val elemento = groupcheckgeneros.getChildAt(i) as CheckBox
 
-                                for(x in listageneros){
-                                    if(elemento.id == x.toInt()){
-                                        elemento.isChecked = true
+                                    for(x in listageneros){
+                                        if(elemento.id == x.toInt()){
+                                            elemento.isChecked = true
+                                        }
                                     }
                                 }
                             }
-                        }
-                    }
-
-                    R.id.mostrarpopularidad -> {
-                        setContentView(R.layout.mostrarpopularidad)
-                        currentLayout = R.layout.mostrarpopularidad
-
-                        if(popular){
-                            val botonComercial = findViewById<RadioButton>(R.id.comercial)
-                            botonComercial.isChecked = true
-                        }
-                        else{
-                            val botonIndependiente = findViewById<RadioButton>(R.id.independiente)
-                            botonIndependiente.isChecked = true
                         }
                     }
 
@@ -79,45 +76,22 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
                         setContentView(R.layout.mostrarepoca)
                         currentLayout = R.layout.mostrarepoca
 
-                        pickerDesde = findViewById(R.id.pickerDesde)
-                        pickerDesde!!.maxValue = 2020
-                        pickerDesde!!.minValue = 1920
-                        if(anioDesde != 1920){
-                            pickerDesde!!.value = anioDesde
-                        }
+                        sliderDecada = findViewById(R.id.sliderdecada)
+                        sliderDecada!!.setValues(decadaDesde.toFloat(),decadaHasta.toFloat())
 
-                        pickerHasta = findViewById(R.id.pickerHasta)
-                        pickerHasta!!.maxValue = 2020
-                        pickerHasta!!.minValue = 1920
-                        if(anioHasta != 1920){
-                            pickerHasta!!.value = anioHasta
-                        }
+                        sliderAnioDesde = findViewById(R.id.slideraniodesde)
+                        sliderAnioDesde!!.value = anioDesde.toFloat()
 
-                        pickerDesde!!.setOnValueChangedListener { _, _, newVal ->
-                            pickerHasta!!.minValue = newVal
-                            anioDesde = newVal
-                        }
-
-                        pickerHasta!!.setOnValueChangedListener { _, _, newVal ->
-                            pickerDesde!!.maxValue = newVal
-                            anioHasta = newVal
-                        }
+                        sliderAnioHasta = findViewById(R.id.slideraniohasta)
+                        sliderAnioHasta!!.value = anioHasta.toFloat()
                     }
 
                     R.id.mostrarpuntuacionminima -> {
                         setContentView(R.layout.mostrarpuntuacion)
                         currentLayout = R.layout.mostrarpuntuacion
 
-                        pickerPuntuacion = findViewById(R.id.pickerPuntuacion)
-                        pickerPuntuacion!!.maxValue = 100
-                        pickerPuntuacion!!.minValue = 0
-                        if(puntuacionMinima != 0){
-                            pickerPuntuacion!!.value = puntuacionMinima
-                        }
-
-                        pickerPuntuacion!!.setOnValueChangedListener{ _,_, newVal ->
-                            puntuacionMinima = newVal
-                        }
+                        sliderPuntuacion = findViewById(R.id.sliderpuntuacion)
+                        sliderPuntuacion!!.value = puntuacionMinima
                     }
                 }
             }
@@ -125,40 +99,45 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
             R.layout.mostrargeneros -> {
                 val groupcheckgeneros = findViewById<LinearLayout>(R.id.groupcheckgeneros)
 
-                generos = "["
-                for(i in 0 until groupcheckgeneros.childCount){
-                    val elemento = groupcheckgeneros.getChildAt(i) as CheckBox
+                if(v.id != R.id.cancelar){
+                    generos = "["
+                    for(i in 0 until groupcheckgeneros.childCount){
+                        val elemento = groupcheckgeneros.getChildAt(i) as CheckBox
 
-                    if(elemento.isChecked){
-                        if(generos == "["){
-                            generos += "${elemento.id}"
-                        } else{
-                            generos += ",${elemento.id}"
+                        if(elemento.isChecked){
+                            if(generos == "["){
+                                generos += "${elemento.id}"
+                            } else{
+                                generos += ",${elemento.id}"
+                            }
                         }
+
                     }
-
+                    generos += "]"
                 }
-                generos += "]"
-
-                setContentView(R.layout.activity_obtener_recomendacion2)
-                currentLayout = R.layout.activity_obtener_recomendacion2
-            }
-
-            R.layout.mostrarpopularidad -> {
-                val grupoRadio = findViewById<RadioGroup>(R.id.grouppopularidad)
-
-                popular = (grupoRadio.checkedRadioButtonId == R.id.comercial)
+                Log.i("GENEROS", generos!!)
 
                 setContentView(R.layout.activity_obtener_recomendacion2)
                 currentLayout = R.layout.activity_obtener_recomendacion2
             }
 
             R.layout.mostrarepoca -> {
+                if(v.id != R.id.cancelarepoca){
+                    decadaDesde = sliderDecada!!.values[0].toInt()
+                    decadaHasta = sliderDecada!!.values[1].toInt()
+
+                    anioDesde = sliderAnioDesde!!.value.toInt()
+                    anioHasta = sliderAnioHasta!!.value.toInt()
+                }
                 setContentView(R.layout.activity_obtener_recomendacion2)
                 currentLayout = R.layout.activity_obtener_recomendacion2
             }
 
             R.layout.mostrarpuntuacion -> {
+                if(v.id != R.id.cancelarpuntuacion){
+                    puntuacionMinima = sliderPuntuacion!!.value
+                }
+
                 setContentView(R.layout.activity_obtener_recomendacion2)
                 currentLayout = R.layout.activity_obtener_recomendacion2
             }
@@ -167,6 +146,9 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
 
     @SuppressLint("InflateParams")
     fun verPeliculasRelacionadas(v: View){
+        val grupoRadio = findViewById<RadioGroup>(R.id.grouppopularidad)
+        popular = (grupoRadio.checkedRadioButtonId == R.id.comercial)
+
         //Solicitar generos y obtener IDs
         obtenerIdsGeneros()
 

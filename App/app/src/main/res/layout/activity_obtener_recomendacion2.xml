@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ObtenerRecomendacion2">
 
+    <RadioGroup
+        android:id="@+id/grouppopularidad"
+        android:layout_width="146dp"
+        android:layout_height="112dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
+
+        <RadioButton
+            android:id="@+id/comercial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/si" />
+
+        <RadioButton
+            android:id="@+id/independiente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no" />
+    </RadioGroup>
+
     <Button
         android:id="@+id/button4"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -24,8 +45,8 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="366dp"
-        android:layout_height="117dp"
+        android:layout_width="369dp"
+        android:layout_height="80dp"
         android:layout_marginTop="48dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center"
@@ -41,7 +62,7 @@
         android:id="@+id/mostrargeneros"
         android:layout_width="330dp"
         android:layout_height="46dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:onClick="botonParametroPulsado"
         android:text="@string/generos"
         app:backgroundTint="@color/teal_700"
@@ -54,7 +75,7 @@
         android:id="@+id/mostrarepocas"
         android:layout_width="323dp"
         android:layout_height="44dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:onClick="botonParametroPulsado"
         android:text="@string/epoca"
         app:backgroundTint="@color/teal_700"
@@ -66,7 +87,7 @@
         android:id="@+id/mostrarpuntuacionminima"
         android:layout_width="323dp"
         android:layout_height="42dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:onClick="botonParametroPulsado"
         android:text="@string/puntuacionminima"
         app:backgroundTint="@color/teal_700"
@@ -75,27 +96,28 @@
         app:layout_constraintTop_toBottomOf="@+id/mostrarepocas" />
 
     <Button
-        android:id="@+id/mostrarpopularidad"
-        android:layout_width="317dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="40dp"
-        android:onClick="botonParametroPulsado"
-        android:text="@string/popularidad"
+        android:id="@+id/button12"
+        android:layout_width="55dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="12dp"
+        android:onClick="verPeliculasRelacionadas"
         app:backgroundTint="@color/teal_700"
+        app:icon="@drawable/icono_lupa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/grouppopularidad" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="321dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center"
+        android:text="@string/popularidad"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mostrarpuntuacionminima" />
-
-    <Button
-        android:id="@+id/button12"
-        android:layout_width="164dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="56dp"
-        android:onClick="verPeliculasRelacionadas"
-        android:text="@string/buscar"
-        app:backgroundTint="@color/teal_700"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mostrarpopularidad" />
 </androidx.constraintlayout.widget.ConstraintLayout>

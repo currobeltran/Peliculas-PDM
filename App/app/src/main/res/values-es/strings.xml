@@ -44,4 +44,7 @@
     <string name="anadirfavoritos">Añadir a favoritos</string>
     <string name="mispeliculas">Mis películas</string>
     <string name="agite">Agite para ver otras</string>
+    <string name="selecciondecada">Seleccione década</string>
+    <string name="seleccioninf">Seleccione último dígito límite inferior</string>
+    <string name="seleccionsup">Seleccione último dígito límite superior</string>
 </resources>
