@@ -26,8 +26,16 @@ import kotlin.math.abs
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity(), SensorEventListener {
+    /**
+     * Variables procedentes de otros intents
+     */
     var idsesion: String = ""
     var requestToken: String = ""
+
+    /**
+     * Distintas variables que manejarán información de
+     * esta pantalla
+     */
     var pelisRecomendadas: String = ""
     var filepath1: String = ""
     var filepath2: String = ""
@@ -43,7 +51,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     var ultimaPeliAleatoria = -1
     var nombrePeliRecomendada = ""
 
-    //Variables para el acelerómetro
+    /**
+     * Variables que utilizaremos para controlar la acción con
+     * el acelerómetro
+     */
     var sensorManager: SensorManager? = null
     var sensor: Sensor? = null
     var lastUpdate: Long = 0
@@ -52,7 +63,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     var last_z = 0f
     val SHAKE_THRESHOLD = 3000
 
-    //Variable para el carrusel de posters de peliculas
+    /**
+     * Variable que controlará el carrusel de películas
+     * Se define el Listener que tiene el proceso de carga de las imágenes
+     * que aparecerán en el carrusel
+     */
     var imageListener: ImageListener = ImageListener { position, imageView ->
         val idPeli = vectorPelisRecomendadasDefinitivas[position].getInt("id")
 
@@ -97,10 +112,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Se carga el acelerómetro para cambiar las películas del carrusel al agitar
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         sensor = sensorManager!!.getDefaultSensor(TYPE_ACCELEROMETER)
         sensorManager!!.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
 
+        //Obtenemos variables de otros intents
         requestToken = intent.getStringExtra("RequestToken")!!
         if(intent.getStringExtra("IDSESION") != null){
             idsesion = intent.getStringExtra("IDSESION")!!
@@ -110,14 +127,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             peticionIdSesion()
 
             while(idsesion == ""){
-
+                //Pequeña espera para obtener la información de la llamada anterior
             }
         }
 
         peticionInformacionCuenta()
 
         while(infousuario == ""){
-
+            //Pequeña espera para obtener la información de la llamada anterior
         }
 
         peticionRecomendaciones()
@@ -132,11 +149,16 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             vectorPelisRecomendadasDefinitivas[i] = vectorPelisRecomendadas.getJSONObject(i)
         }
 
+        //Iniciamos el carrusel
         val carouselView = findViewById<CarouselView>(R.id.carouselView)
         carouselView.pageCount = vectorPelisRecomendadasDefinitivas.size
         carouselView.setImageListener(imageListener)
     }
 
+    /**
+     * Función de búsqueda de película sin asistente de voz
+     * Se cargan las variables necesarias en el intent y se inicia
+     */
     fun noAsistente(view: View){
         val intentObtenerRecomendacion = Intent(this, ObtenerRecomendacion2::class.java)
         intentObtenerRecomendacion.putExtra("IDSESION", idsesion)
@@ -148,6 +170,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         startActivity(intentObtenerRecomendacion)
     }
 
+    /**
+     * Función de búsqueda de película con asistente de voz
+     * Se cargan las variables necesarias en el intent y se inicia
+     */
     fun siAsistente(view: View){
         val intentAsistenteDeVoz = Intent(this, AsistenteDeVoz::class.java)
         intentAsistenteDeVoz.putExtra("IDSESION", idsesion)
@@ -159,6 +185,14 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         startActivity(intentAsistenteDeVoz)
     }
 
+    /**
+     * Función para obtener más información de una película y valorarla.
+     * Dependiendo del elemento del carrusel, se visualizará la información de
+     * una película u otra
+     *
+     * Se inicia una nueva actividad donde se muestra tanto el título, la imagen y
+     * la sinopsis de la película
+     */
     fun valorarPelicula(view: View){
         val carouselView = findViewById<CarouselView>(R.id.carouselView)
         val intentValorarPeli = Intent(this, ValorarPelicula::class.java)
@@ -196,6 +230,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         startActivity(intentValorarPeli)
     }
 
+    /**
+     * Función para solicitar un ID de sesión a través de un Request Token
+     *
+     * Este ID nos servirá para peticiones que realizaremos en un futuro.
+     */
     fun peticionIdSesion(){
         val requestBody = FormBody.Builder()
             .add("request_token", requestToken)
@@ -229,6 +268,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             })
     }
 
+    /**
+     * Función con la que se obtienen las películas recomendadas del carrusel
+     * Si no existen suficientes películas valoradas positivamente por el usuario,
+     * se muestran películas en tendencia actualmente dentro de la base de datos
+     */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun peticionRecomendaciones(){
         peticionPeliculasFavoritas()
@@ -257,6 +301,9 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         eliminaFavoritosRecomendaciones()
     }
 
+    /**
+     * Función para solicitar las películas favoritas del usuario
+     */
     fun peticionPeliculasFavoritas(){
         val idCuenta = JSONObject(infousuario).getInt("id")
         Log.i("IDCUENTA", idCuenta.toString())
@@ -284,6 +331,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 })
     }
 
+    /**
+     * Petición para obtener las películas recomendadas a partir de una película
+     * concreta
+     */
     fun peticionRecomendacionConPelicula(){
         val jsonArrayFavoritas = JSONArray(pelisFavoritas)
         val random = Random(System.currentTimeMillis())
@@ -318,6 +369,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 })
     }
 
+    /**
+     * Función para eliminar las películas que el usuario ha marcado como
+     * que le gustan, de manera que no aparezcan en el carrusel de películas
+     */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun eliminaFavoritosRecomendaciones(){
         var arrayPelisRecomendadas = JSONArray(pelisRecomendadas)
@@ -340,6 +395,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         pelisRecomendadas = arrayPelisRecomendadas.toString()
     }
 
+    /**
+     * Función para obtener las películas que están ahora mismo
+     * siendo tendencia dentro de la base de datos
+     */
     fun peticionTendenciasPeliculas(){
         val request = Request.Builder()
                 .url("https://api.themoviedb.org/3/trending/movie/week?api_key=ecfe4f06a0f028c3618838df92bfea77")
@@ -365,6 +424,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 })
     }
 
+    /**
+     * Función para solicitar el poster de una película concreta.
+     *
+     * Dicho poster será parte de una URI donde realizaremos una
+     * petición posteriormente para obtener la imagen en cuestión.
+     */
     fun peticionImagenesPelicula(idPeli: Int, position: Int){
         val request = Request.Builder()
             .url("https://api.themoviedb.org/3/movie/$idPeli/images?api_key=ecfe4f06a0f028c3618838df92bfea77")
@@ -398,6 +463,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             })
     }
 
+    /**
+     * Función para solicitar infomación acerca de nuestra cuenta de usuario
+     *
+     * Nos servirá para obtener nuestro ID de usuario dentro de la base de datos,
+     * con lo que podremos realizar acciones sobre nuestra propia cuenta
+     */
     fun peticionInformacionCuenta(){
         val request = Request.Builder()
                 .url("https://api.themoviedb.org/3/account?api_key=ecfe4f06a0f028c3618838df92bfea77&session_id=$idsesion")
@@ -421,6 +492,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                 })
     }
 
+    /**
+     * Función que detectará cambios en el acelerómetro de nuestro móvil
+     *
+     * Si la velocidad de movimiento llega a un punto determinado, se cambian
+     * las películas del carrusel.
+     *
+     * Para calcular la velocidad hay que realizar distintos cálculos matemáticos
+     * ya que la información obtenida "en crudo" tiene también en cuenta la gravedad.
+     */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onSensorChanged(event: SensorEvent?) {
         if(event!!.sensor.type == TYPE_ACCELEROMETER){
@@ -461,6 +541,10 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager!!.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
+    /**
+     * Función que cambia las películas del carrusel, con el
+     * objetivo de mostrar unas distintas
+     */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun cambiarPeliculasCarrusel(){
         peticionRecomendaciones()
@@ -478,7 +562,19 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         carouselView.setImageListener(imageListener)
     }
 
+    /**
+     * Función para ver una lista de películas con las que se ha interactuado
+     * recientemente
+     */
     fun verMisPeliculas(v: View){
+        val intentListaPeliculas = Intent(this, ListadoPeliculas::class.java)
+        intentListaPeliculas.putExtra("IDSESION", idsesion)
 
+        val jsonInfoUsuario = JSONObject(infousuario)
+        val idUsuario = jsonInfoUsuario.getInt("id")
+        intentListaPeliculas.putExtra("IDCUENTA", idUsuario)
+        intentListaPeliculas.putExtra("TOKEN", requestToken)
+
+        startActivity(intentListaPeliculas)
     }
 }

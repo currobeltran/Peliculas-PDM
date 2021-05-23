@@ -50,4 +50,6 @@
     <string name="selecciondecada">Seleccione década</string>
     <string name="seleccioninf">Seleccione último dígito límite inferior</string>
     <string name="seleccionsup">Seleccione último dígito límite superior</string>
+
+    <string name="listadeseguimiento">In watchlist</string>
 </resources>

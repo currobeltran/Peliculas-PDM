@@ -12,15 +12,22 @@ import org.json.JSONObject
 import java.io.IOException
 import java.util.*
 
+//Pantalla de inicio de sesión
 class InicioSesion : AppCompatActivity() {
     var requestToken: String = ""
 
+    /**
+     * onCreate donde además se solicita el Request Token
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio_sesion)
         peticionRequestToken()
     }
 
+    /**
+     * Función correspondiente al botón de inicio de sesión
+     */
     fun inicioSesion(view: View){
         val nombreDeUsuario = findViewById<EditText>(R.id.editTextTextPersonName)
         val contraseña = findViewById<EditText>(R.id.editTextTextPassword)
@@ -28,6 +35,11 @@ class InicioSesion : AppCompatActivity() {
         peticionInicioSesion(nombreDeUsuario.text.toString(), contraseña.text.toString(), this)
     }
 
+    /**
+     * Petición para obtener un Request Token
+     * Con este elemento posteriormente seremos capaces de
+     * realizar el inicio de sesión
+     */
     fun peticionRequestToken(){
         val request = Request.Builder()
             .url("https://api.themoviedb.org/3/authentication/token/new?api_key=ecfe4f06a0f028c3618838df92bfea77")
@@ -53,6 +65,14 @@ class InicioSesion : AppCompatActivity() {
             })
     }
 
+    /**
+     * Funcion que nos permitirá iniciar sesión con nuestra cuenta
+     * de usuario de TheMovieDB, con la que tendremos acceso a
+     * nuestra información.
+     *
+     * Si hay éxito, se pasa a la página principal de la aplicación
+     * En caso contrario, se avisa al usuario
+     */
     fun peticionInicioSesion(usuario: String, contraseña: String, contexto: Context){
         val requestBody = FormBody.Builder()
             .add("username", usuario)

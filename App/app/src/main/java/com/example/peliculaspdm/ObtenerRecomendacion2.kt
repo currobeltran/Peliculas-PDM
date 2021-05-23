@@ -156,7 +156,7 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
 
         }
 
-        var generosAPIJSON = JSONObject(generosAPI).getJSONArray("genres")
+        var generosAPIJSON = JSONObject(generosAPI!!).getJSONArray("genres")
 
         generos = generos!!.removeRange(0,1)
         generos = generos!!.removeRange(generos!!.length-1,generos!!.length)
@@ -218,6 +218,9 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
         val requestToken = intent.getStringExtra("TOKEN")
         intentPeliculasRelacionadas.putExtra("TOKEN", requestToken)
 
+        val anioPeliculaDesde = decadaDesde + anioDesde
+        intentPeliculasRelacionadas.putExtra("ANIODESDE", anioPeliculaDesde)
+
         startActivity(intentPeliculasRelacionadas)
     }
 
@@ -242,13 +245,14 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
 
     fun peticionPeliculas(){
         var request: Request? = null
+        val anioHastaCompleto = decadaHasta + anioHasta
 
         if(popular){
             request = Request.Builder()
                     .url("https://api.themoviedb.org/3/discover/movie?api_key=ecfe4f06a0f028c3618838df92bfea77&" +
                             "with_genres=$generosSolicitados&" +
-                            "vote_average.gte=${puntuacionMinima / 10.0f}&" +
-                            "release_date.gte=$anioDesde&" +
+                            "vote_average.gte=$puntuacionMinima&" +
+                            "release_date.lte=$anioHastaCompleto&" +
                             "sort_by=popularity.desc")
                     .build()
         }
@@ -256,8 +260,8 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
             request = Request.Builder()
                     .url("https://api.themoviedb.org/3/discover/movie?api_key=ecfe4f06a0f028c3618838df92bfea77&" +
                             "with_genres=$generosSolicitados&" +
-                            "vote_average.gte=${puntuacionMinima / 10.0f}&" +
-                            "release_date.gte=$anioDesde&" +
+                            "vote_average.gte=$puntuacionMinima&" +
+                            "release_date.lte=$anioHastaCompleto&" +
                             "sort_by=popularity.asc&vote_count.gte=25")
                     .build()
         }
@@ -274,8 +278,8 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
                         peliculasRecomendadas = res.getJSONArray("results").toString()
                         Log.i("PELICULAS RELACIONADAS", "https://api.themoviedb.org/3/discover/movie?api_key=ecfe4f06a0f028c3618838df92bfea77&" +
                                 "with_genres=$generosSolicitados&" +
-                                "vote_average.gte=${puntuacionMinima / 10.0f}&" +
-                                "release_date.gte=$anioDesde&" +
+                                "vote_average.gte=$puntuacionMinima&" +
+                                "release_date.lte=$anioHastaCompleto&" +
                                 "sort_by=popularity.desc")
                     }
 

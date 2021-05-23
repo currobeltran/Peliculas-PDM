@@ -1,10 +1,12 @@
 package com.example.peliculaspdm
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -23,6 +25,7 @@ class PeliculasRelacionadas : AppCompatActivity() {
     var idCuenta = ""
     var idSesion = ""
 
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_peliculas_relacionadas)
@@ -44,11 +47,11 @@ class PeliculasRelacionadas : AppCompatActivity() {
                     val requestBody = FormBody.Builder()
                             .add("media_type", "movie")
                             .add("media_id", idPeli)
-                            .add("favorite", "true")
+                            .add("watchlist", "true")
                             .build()
 
                     val request = Request.Builder()
-                            .url("https://api.themoviedb.org/3/account/$idCuenta/favorite?api_key=ecfe4f06a0f028c3618838df92bfea77&session_id=$idSesion")
+                            .url("https://api.themoviedb.org/3/account/$idCuenta/watchlist?api_key=ecfe4f06a0f028c3618838df92bfea77&session_id=$idSesion")
                             .method("POST",requestBody)
                             .build()
                     val cliente = OkHttpClient()
@@ -78,10 +81,22 @@ class PeliculasRelacionadas : AppCompatActivity() {
 
         })
 
-        Log.i("LLEGA", "2")
-
         var peliculasRelacionadas = intent.getStringExtra("PELICULAS")
         var vectorPeliculasRelacionadasJSON = JSONArray(peliculasRelacionadas)
+        var anioDesde = intent.getIntExtra("ANIODESDE", -1)
+
+        var ind = 0
+        while(ind < vectorPeliculasRelacionadasJSON.length()){
+            val aniopeli = vectorPeliculasRelacionadasJSON.getJSONObject(ind).getString("release_date")
+            val aniopelinumero = ("${aniopeli[0]}${aniopeli[1]}${aniopeli[2]}${aniopeli[3]}").toInt()
+            Log.i("ANIOPELI", aniopelinumero.toString())
+            if(aniopelinumero < anioDesde){
+                vectorPeliculasRelacionadasJSON.remove(ind)
+            }
+            else{
+                ind++
+            }
+        }
 
         if(vectorPeliculasRelacionadasJSON.length() > 5){
             for(i in 0 until 5){
@@ -102,8 +117,10 @@ class PeliculasRelacionadas : AppCompatActivity() {
                         urlImagenSeleccionada,
                         vectorPeliculasRelacionadasJSON.getJSONObject(i).getString("id"))
             }
+
+            getData()
         }
-        else{
+        else if(vectorPeliculasRelacionadasJSON.length() > 0){
             for(i in 0 until vectorPeliculasRelacionadasJSON.length()){
                 imagenesPeliSeleccionada = ""
                 solicitarImagenes(vectorPeliculasRelacionadasJSON.getJSONObject(i).getInt("id"))
@@ -119,9 +136,12 @@ class PeliculasRelacionadas : AppCompatActivity() {
                         urlImagenSeleccionada,
                         vectorPeliculasRelacionadasJSON.getJSONObject(i).getString("id"))
             }
-        }
 
-        getData()
+            getData()
+        }
+        else{
+
+        }
     }
 
     fun getData(){

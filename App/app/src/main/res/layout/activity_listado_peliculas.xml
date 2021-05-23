@@ -7,14 +7,15 @@
     tools:context=".ListadoPeliculas">
 
     <ScrollView
-        android:layout_width="369dp"
-        android:layout_height="615dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="353dp"
+        android:layout_height="569dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <LinearLayout
+            android:id="@+id/scrollpeliculas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />

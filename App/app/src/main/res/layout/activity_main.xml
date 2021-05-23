@@ -10,7 +10,7 @@
         android:id="@+id/sitegusto2"
         android:layout_width="365dp"
         android:layout_height="43dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="44dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center"
         android:text="@string/agite"
@@ -24,14 +24,13 @@
         android:id="@+id/sitegusto"
         android:layout_width="365dp"
         android:layout_height="43dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center"
         android:text="@string/titulocarrusel"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +38,7 @@
         android:id="@+id/carouselView"
         android:layout_width="247dp"
         android:layout_height="321dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         app:fillColor="#FFFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,25 +53,23 @@
         android:id="@+id/button"
         android:layout_width="259dp"
         android:layout_height="43dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/catamaran_medium"
         android:onClick="siAsistente"
         android:text="@string/asistentevoz"
         android:textSize="14sp"
         android:textStyle="bold"
         app:backgroundTint="@color/teal_700"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="256dp"
         android:layout_height="46dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/catamaran_medium"
         android:onClick="noAsistente"
         android:text="@string/obtenerpelicula"
@@ -80,7 +77,7 @@
         android:textStyle="bold"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mensajePeliculasFavoritas" />
 
@@ -101,8 +98,8 @@
 
     <TextView
         android:id="@+id/mensajePeliculasFavoritas"
-        android:layout_width="354dp"
-        android:layout_height="34dp"
+        android:layout_width="370dp"
+        android:layout_height="22dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center"
@@ -116,11 +113,12 @@
         android:id="@+id/button9"
         android:layout_width="257dp"
         android:layout_height="47dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:onClick="verMisPeliculas"
         android:text="@string/mispeliculas"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mensajePeliculasFavoritas" />
 
