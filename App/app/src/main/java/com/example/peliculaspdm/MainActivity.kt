@@ -3,6 +3,7 @@ package com.example.peliculaspdm
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.hardware.Sensor
 import android.hardware.Sensor.TYPE_ACCELEROMETER
 import android.hardware.SensorEvent
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     var filepath4: String = ""
     var infousuario: String = ""
     var pelisFavoritas: String = ""
+    var cursorPeliculasNoMeGusta: Cursor? = null
     var vectorPelisRecomendadasDefinitivas = arrayListOf(JSONObject(),
             JSONObject(),
             JSONObject(),
@@ -290,6 +292,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             mensaje.text = "Valore positivamente 20 películas para obtener recomendaciones personalizadas"
         }
 
+        peticionPeliculasNoMeGusta()
+
+        while (cursorPeliculasNoMeGusta == null){
+
+        }
+
         peticionRecomendacionConPelicula()
 
         while(pelisRecomendadas == ""){
@@ -297,6 +305,8 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
         eliminaFavoritosRecomendaciones()
+
+        eliminaNoMeGustaRecomendaciones()
     }
 
     /**
@@ -327,6 +337,18 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         pelisFavoritas = res.getJSONArray("results").toString()
                     }
                 })
+    }
+
+    /**
+     * Función que nos proporciona la lista de películas que
+     * no le gustan al usuario
+     */
+    fun peticionPeliculasNoMeGusta(){
+        var dbHelper = MyDbHelper(this)
+        var sqliteBD = dbHelper.readableDatabase
+
+        var cursor = sqliteBD.rawQuery("SELECT * FROM ${PeliculaContract.PeliculaEntry.TABLE_NAME}", null)
+        cursorPeliculasNoMeGusta = cursor
     }
 
     /**
@@ -388,6 +410,28 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                     }
                 }
             }
+        }
+
+        pelisRecomendadas = arrayPelisRecomendadas.toString()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    fun eliminaNoMeGustaRecomendaciones(){
+        var arrayPelisRecomendadas = JSONArray(pelisRecomendadas)
+        if(cursorPeliculasNoMeGusta!!.moveToNext()){
+            do{
+                var j = 0
+
+                do {
+                    if(cursorPeliculasNoMeGusta!!.getString(1) == arrayPelisRecomendadas.getJSONObject(j).getString("title")){
+                        arrayPelisRecomendadas.remove(j)
+                    }
+                    else{
+                        j++
+                    }
+                } while (j < arrayPelisRecomendadas.length())
+
+            }while (cursorPeliculasNoMeGusta!!.moveToNext())
         }
 
         pelisRecomendadas = arrayPelisRecomendadas.toString()

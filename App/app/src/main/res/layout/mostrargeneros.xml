@@ -9,6 +9,8 @@
         android:id="@+id/button15"
         android:layout_width="138dp"
         android:layout_height="43dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
@@ -16,12 +18,13 @@
         android:text="@android:string/ok"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelar"
         app:layout_constraintTop_toBottomOf="@+id/groupcheckgeneros" />
 
     <LinearLayout
         android:id="@+id/groupcheckgeneros"
-        android:layout_width="327dp"
-        android:layout_height="541dp"
+        android:layout_width="339dp"
+        android:layout_height="482dp"
         android:layout_marginTop="12dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"

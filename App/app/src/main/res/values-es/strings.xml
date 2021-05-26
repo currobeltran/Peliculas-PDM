@@ -53,4 +53,25 @@
     <string name="nomegusta">No me gusta</string>
     <string name="anadirwatchlist">Añadir a lista de seguimiento</string>
     <string name="nomasmostrar">No hay nada que mostrar</string>
+
+    <string name="bienvenida">Bienvenido al asistente de voz.</string>
+    <string name="elijedrama">Ha elegido drama, ¿es correcto?</string>
+    <string name="elijecomedia">Ha elegido comedia, ¿es correcto?</string>
+    <string name="elijeaccion">Ha elegido acción, ¿es correcto?</string>
+    <string name="elijethriller">Ha elegido thriller, ¿es correcto?</string>
+    <string name="elijescifi">Ha elegido ciencia ficción, ¿es correcto?</string>
+    <string name="elijedocumental">Ha elegido documental, ¿es correcto?</string>
+    <string name="elijeterror">Ha elegido terror, ¿es correcto?</string>
+    <string name="elijewestern">Ha elegido western, ¿es correcto?</string>
+    <string name="elijemusical">Ha elegido musical, ¿es correcto?</string>
+    <string name="noentendi">No le he entendido, por favor, vuelva a repetir la opción seleccionada</string>
+
+    <string name="preguntaanio">"Diga ahora el año del que desea la película"</string>
+    <string name="preguntagenero">"Dígame uno de los siguientes géneros"</string>
+    <string name="preguntapopularidad">"Por último, ¿desea una película conocida?"</string>
+    <string name="aniovalido">"Por favor, diga un año válido"</string>
+
+    <string name="popularsi">"Ha elegido una película popular, ¿es correcto?"</string>
+    <string name="popularno">"Ha elegido una película no conocida, ¿es correcto?"</string>
+    <string name="siono">"Por favor, responda con si o no"</string>
 </resources>

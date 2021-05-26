@@ -41,11 +41,17 @@ class AsistenteDeVoz : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         reproductor = TextToSpeech(this, object: TextToSpeech.OnInitListener {
-            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+            @RequiresApi(Build.VERSION_CODES.P)
             override fun onInit(status: Int) {
+                val currentLocale = resources.configuration.locales.get(0)
                 val localeSpanish = Locale("es", "ES")
-                reproductor!!.language = localeSpanish
-                reproductor!!.speak("Bienvenido al asistente de voz. En primer lugar, ",TextToSpeech.QUEUE_ADD, null, "")
+                if(currentLocale == Locale.UK){
+                    reproductor!!.language = Locale.UK
+                } else{
+                    reproductor!!.language = localeSpanish
+                }
+
+                reproductor!!.speak(getString(R.string.bienvenida),TextToSpeech.QUEUE_ADD, null, "")
                 decirGeneros()
             }
         })
@@ -105,7 +111,7 @@ class AsistenteDeVoz : AppCompatActivity() {
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun decirGeneros(){
-        reproductor!!.speak("Dígame uno de los siguientes géneros",TextToSpeech.QUEUE_ADD, null, "")
+        reproductor!!.speak(getString(R.string.preguntagenero),TextToSpeech.QUEUE_ADD, null, "")
         reproductor!!.speak(getString(R.string.drama),TextToSpeech.QUEUE_ADD, null, "")
         reproductor!!.speak(getString(R.string.comedia),TextToSpeech.QUEUE_ADD, null, "")
         reproductor!!.speak(getString(R.string.accion),TextToSpeech.QUEUE_ADD, null, "")
@@ -127,52 +133,52 @@ class AsistenteDeVoz : AppCompatActivity() {
         var JSONGeneros = JSONObject(generosAPI).getJSONArray("genres")
         when (spokenText) {
             "drama" -> {
-                reproductor!!.speak("Ha elegido drama, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijedrama), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(6).getString("id")
                 estadoAsistente = 1
             }
             "comedia", "comedy" -> {
-                reproductor!!.speak("Ha elegido comedia, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijecomedia), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(3).getString("id")
                 estadoAsistente = 1
             }
             "acción", "action" -> {
-                reproductor!!.speak("Ha elegido acción, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijeaccion), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(0).getString("id")
                 estadoAsistente = 1
             }
             "thriller" -> {
-                reproductor!!.speak("Ha elegido thriller, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijethriller), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(16).getString("id")
                 estadoAsistente = 1
             }
             "ciencia ficción" -> {
-                reproductor!!.speak("Ha elegido ciencia ficción, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijescifi), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(14).getString("id")
                 estadoAsistente = 1
             }
             "documental" -> {
-                reproductor!!.speak("Ha elegido documental, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijedocumental), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(5).getString("id")
                 estadoAsistente = 1
             }
             "terror" -> {
-                reproductor!!.speak("Ha elegido terror, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijeterror), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(10).getString("id")
                 estadoAsistente = 1
             }
             "western" -> {
-                reproductor!!.speak("Ha elegido western, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijewestern), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(18).getString("id")
                 estadoAsistente = 1
             }
             "musical" -> {
-                reproductor!!.speak("Ha elegido musical, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.elijemusical), TextToSpeech.QUEUE_ADD, null, "")
                 genero = JSONGeneros.getJSONObject(11).getString("id")
                 estadoAsistente = 1
             }
             else -> {
-                reproductor!!.speak("No le he entendido, por favor, vuelva a repetir la opción seleccionada", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.noentendi), TextToSpeech.QUEUE_ADD, null, "")
             }
         }
     }
@@ -205,7 +211,7 @@ class AsistenteDeVoz : AppCompatActivity() {
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun preguntarAnio(){
-        reproductor!!.speak("Diga ahora el año del que desea la película", TextToSpeech.QUEUE_ADD, null, "")
+        reproductor!!.speak(getString(R.string.preguntaanio), TextToSpeech.QUEUE_ADD, null, "")
     }
 
     /**
@@ -215,12 +221,16 @@ class AsistenteDeVoz : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun obtenerAnio(spokenText: String){
         if(!comprobarValidezAnio(spokenText)){
-            reproductor!!.speak("Por favor, diga un año válido", TextToSpeech.QUEUE_ADD, null, "")
+            reproductor!!.speak(getString(R.string.aniovalido), TextToSpeech.QUEUE_ADD, null, "")
         }
         else{
             val stringNumero = spokenText.toInt()
             anioPeli = stringNumero
-            reproductor!!.speak("Ha dicho el año $spokenText, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+            if(reproductor!!.language == Locale.ENGLISH){
+                reproductor!!.speak("You said the year $spokenText, ¿is that correct?", TextToSpeech.QUEUE_ADD, null, "")
+            } else{
+                reproductor!!.speak("Ha dicho el año $spokenText, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+            }
             estadoAsistente = 3
         }
     }
@@ -265,7 +275,7 @@ class AsistenteDeVoz : AppCompatActivity() {
      */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun preguntarPopularidad(){
-        reproductor!!.speak("Por último, ¿desea una película conocida?", TextToSpeech.QUEUE_ADD, null, "")
+        reproductor!!.speak(getString(R.string.preguntapopularidad), TextToSpeech.QUEUE_ADD, null, "")
     }
 
     /**
@@ -276,17 +286,17 @@ class AsistenteDeVoz : AppCompatActivity() {
     fun obtenerPopularidad(spokenText: String){
         when(spokenText){
             "si", "yes" -> {
-                reproductor!!.speak("Ha elegido una película popular, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.popularsi), TextToSpeech.QUEUE_ADD, null, "")
                 popular = true
                 estadoAsistente = 5
             }
             "no" -> {
-                reproductor!!.speak("Ha elegido una película no conocida, ¿es correcto?", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.popularno), TextToSpeech.QUEUE_ADD, null, "")
                 popular = false
                 estadoAsistente = 5
             }
             else -> {
-                reproductor!!.speak("Por favor, responda con si o no", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.siono), TextToSpeech.QUEUE_ADD, null, "")
             }
         }
     }
@@ -326,7 +336,7 @@ class AsistenteDeVoz : AppCompatActivity() {
                 estadoAsistente = 4
             }
             else -> {
-                reproductor!!.speak("Perdone, no le he entendido", TextToSpeech.QUEUE_ADD, null, "")
+                reproductor!!.speak(getString(R.string.noentendi), TextToSpeech.QUEUE_ADD, null, "")
             }
         }
     }
@@ -372,7 +382,7 @@ class AsistenteDeVoz : AppCompatActivity() {
             request = Request.Builder()
                     .url("https://api.themoviedb.org/3/discover/movie?api_key=ecfe4f06a0f028c3618838df92bfea77&" +
                             "with_genres=$genero&" +
-                            "release_date.gte=$anioPeli&" +
+                            "year=$anioPeli&" +
                             "sort_by=popularity.asc&vote_count.gte=25")
                     .build()
         }

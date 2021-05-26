@@ -135,7 +135,6 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
                     }
                     generos += "]"
                 }
-                Log.i("GENEROS", generos!!)
 
                 setContentView(R.layout.activity_obtener_recomendacion2)
                 currentLayout = R.layout.activity_obtener_recomendacion2

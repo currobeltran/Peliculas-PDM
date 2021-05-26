@@ -8,9 +8,13 @@
 
     <TextView
         android:id="@+id/sinopsis3"
-        android:layout_width="332dp"
-        android:layout_height="228dp"
+        android:layout_width="336dp"
+        android:layout_height="274dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center_horizontal"
         android:text="@string/titulocarrusel"

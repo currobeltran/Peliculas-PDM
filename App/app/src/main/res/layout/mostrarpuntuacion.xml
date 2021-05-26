@@ -7,11 +7,11 @@
 
     <Button
         android:id="@+id/button14"
-        android:layout_width="148dp"
-        android:layout_height="40dp"
+        android:layout_width="129dp"
+        android:layout_height="39dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:onClick="botonParametroPulsado"
@@ -53,14 +53,17 @@
 
     <Button
         android:id="@+id/cancelarpuntuacion"
-        android:layout_width="149dp"
+        android:layout_width="131dp"
         android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:onClick="botonParametroPulsado"
         android:text="@android:string/cancel"
         app:backgroundTint="@color/teal_700"
+        app:layout_constraintEnd_toStartOf="@+id/button14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sliderpuntuacion" />
 </androidx.constraintlayout.widget.ConstraintLayout>
