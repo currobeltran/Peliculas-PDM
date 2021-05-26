@@ -42,7 +42,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     var filepath3: String = ""
     var filepath4: String = ""
     var infousuario: String = ""
-    var idlista: Int = -1
     var pelisFavoritas: String = ""
     var vectorPelisRecomendadasDefinitivas = arrayListOf(JSONObject(),
             JSONObject(),
@@ -193,41 +192,40 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
      * Se inicia una nueva actividad donde se muestra tanto el título, la imagen y
      * la sinopsis de la película
      */
-    fun valorarPelicula(view: View){
+    fun verInfoPelicula(view: View){
         val carouselView = findViewById<CarouselView>(R.id.carouselView)
-        val intentValorarPeli = Intent(this, ValorarPelicula::class.java)
+        val intentInfoPeliListaSeguir = Intent(this, InfoPeliculaListaSeguir::class.java)
 
         when(carouselView.currentItem){
             0 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[0]
-                intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
-                intentValorarPeli.putExtra("IMAGEN", filepath1)
+                intentInfoPeliListaSeguir.putExtra("PELICULA", peliculaValoracion.toString())
+                intentInfoPeliListaSeguir.putExtra("IMAGEN", filepath1)
             }
             1 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[1]
-                intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
-                intentValorarPeli.putExtra("IMAGEN", filepath2)
+                intentInfoPeliListaSeguir.putExtra("PELICULA", peliculaValoracion.toString())
+                intentInfoPeliListaSeguir.putExtra("IMAGEN", filepath2)
             }
             2 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[2]
-                intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
-                intentValorarPeli.putExtra("IMAGEN", filepath3)
+                intentInfoPeliListaSeguir.putExtra("PELICULA", peliculaValoracion.toString())
+                intentInfoPeliListaSeguir.putExtra("IMAGEN", filepath3)
             }
             3 -> {
                 val peliculaValoracion = vectorPelisRecomendadasDefinitivas[3]
-                intentValorarPeli.putExtra("PELICULA", peliculaValoracion.toString())
-                intentValorarPeli.putExtra("IMAGEN", filepath4)
+                intentInfoPeliListaSeguir.putExtra("PELICULA", peliculaValoracion.toString())
+                intentInfoPeliListaSeguir.putExtra("IMAGEN", filepath4)
             }
         }
-        intentValorarPeli.putExtra("IDSESION", idsesion)
-        intentValorarPeli.putExtra("IDLISTA", idlista)
+        intentInfoPeliListaSeguir.putExtra("IDSESION", idsesion)
 
         val jsonInfoUsuario = JSONObject(infousuario)
         val idUsuario = jsonInfoUsuario.getInt("id")
-        intentValorarPeli.putExtra("IDCUENTA", idUsuario)
-        intentValorarPeli.putExtra("TOKEN", requestToken)
+        intentInfoPeliListaSeguir.putExtra("IDCUENTA", idUsuario)
+        intentInfoPeliListaSeguir.putExtra("TOKEN", requestToken)
 
-        startActivity(intentValorarPeli)
+        startActivity(intentInfoPeliListaSeguir)
     }
 
     /**
@@ -282,7 +280,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
         val arrayPelis = JSONArray(pelisFavoritas)
 
-        if(arrayPelis.length() < 20){
+        if(arrayPelis.length() < 5){
             pelisFavoritas = ""
             peticionTendenciasPeliculas()
             while(pelisFavoritas == ""){
@@ -547,7 +545,12 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
      */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     fun cambiarPeliculasCarrusel(){
+        filepath1 = ""
+        filepath2 = ""
+        filepath3 = ""
+        filepath4 = ""
         peticionRecomendaciones()
+
         while (pelisRecomendadas == ""){
             //Pequeña espera para que el vector no sea vacío
         }
@@ -556,7 +559,31 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         for(i in 0 until 4){
             vectorPelisRecomendadasDefinitivas[i] = vectorPelisRecomendadas.getJSONObject(i)
+            peticionImagenesPelicula(vectorPelisRecomendadasDefinitivas[i].getInt("id"), i)
+            when(i){
+                0 -> {
+                    while (filepath1 == ""){
+
+                    }
+                }
+                1 -> {
+                    while (filepath2 == ""){
+
+                    }
+                }
+                2 -> {
+                    while (filepath3 == ""){
+
+                    }
+                }
+                3 -> {
+                    while (filepath4 == ""){
+
+                    }
+                }
+            }
         }
+
         val carouselView = findViewById<CarouselView>(R.id.carouselView)
         carouselView.pageCount = vectorPelisRecomendadasDefinitivas.size
         carouselView.setImageListener(imageListener)
@@ -572,7 +599,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
 
         val jsonInfoUsuario = JSONObject(infousuario)
         val idUsuario = jsonInfoUsuario.getInt("id")
-        intentListaPeliculas.putExtra("IDCUENTA", idUsuario)
+        intentListaPeliculas.putExtra("IDCUENTA", idUsuario.toString())
         intentListaPeliculas.putExtra("TOKEN", requestToken)
 
         startActivity(intentListaPeliculas)

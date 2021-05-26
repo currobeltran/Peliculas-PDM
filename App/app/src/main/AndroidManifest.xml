@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PeliculasPDM">
-        <activity android:name=".ListadoPeliculas"></activity>
+        <activity android:name=".InfoPeliculaListaSeguir"></activity>
+        <activity android:name=".InfoPelicula" />
+        <activity android:name=".ListadoPeliculas" />
         <activity android:name=".AsistenteDeVoz" />
         <activity android:name=".ObtenerRecomendacion2" />
         <activity

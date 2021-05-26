@@ -12,7 +12,9 @@ import org.json.JSONObject
 import java.io.IOException
 import java.util.*
 
-//Pantalla de inicio de sesión
+/**
+ * Actividad de inicio de sesión
+ */
 class InicioSesion : AppCompatActivity() {
     var requestToken: String = ""
 

@@ -27,34 +27,17 @@
             android:text="@string/no" />
     </RadioGroup>
 
-    <Button
-        android:id="@+id/button4"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="49dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="16dp"
-        android:gravity="start"
-        android:onClick="volverAtras"
-        app:icon="@drawable/abc_vector_test"
-        app:iconPadding="0dp"
-        app:iconTint="#00796B"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="369dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="333dp"
+        android:layout_height="118dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/catamaran_medium"
         android:gravity="center"
         android:text="@string/elijaparametros"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,8 +56,8 @@
 
     <Button
         android:id="@+id/mostrarepocas"
-        android:layout_width="323dp"
-        android:layout_height="44dp"
+        android:layout_width="330dp"
+        android:layout_height="46dp"
         android:layout_marginTop="16dp"
         android:onClick="botonParametroPulsado"
         android:text="@string/epoca"
@@ -85,8 +68,8 @@
 
     <Button
         android:id="@+id/mostrarpuntuacionminima"
-        android:layout_width="323dp"
-        android:layout_height="42dp"
+        android:layout_width="331dp"
+        android:layout_height="47dp"
         android:layout_marginTop="16dp"
         android:onClick="botonParametroPulsado"
         android:text="@string/puntuacionminima"

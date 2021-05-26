@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoPelicula">
+
+    <TextView
+        android:id="@+id/titulo2"
+        android:layout_width="372dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center"
+        android:text="@string/titulocarrusel"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.589"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/posterPeli2"
+        android:layout_width="209dp"
+        android:layout_height="258dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo2"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/sinopsis2"
+        android:layout_width="371dp"
+        android:layout_height="309dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/catamaran_medium"
+        android:gravity="center_horizontal"
+        android:text="@string/titulocarrusel"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/posterPeli2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

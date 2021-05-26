@@ -15,9 +15,13 @@ import com.huxq17.swipecardsview.SwipeCardsView
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
+import org.w3c.dom.Text
 import java.io.IOException
 
-
+/**
+ * Actividad que mostrará las películas encontradas tras realizar
+ * una búsqueda (ya sea con o sin asistente de voz)
+ */
 class PeliculasRelacionadas : AppCompatActivity() {
     var cartas: SwipeCardsView? = null
     var listaPelis: List<Pelicula> = arrayListOf()
@@ -25,6 +29,16 @@ class PeliculasRelacionadas : AppCompatActivity() {
     var idCuenta = ""
     var idSesion = ""
 
+    /**
+     * En esta función inicializamos también un Listener para las cartas
+     * donde se define que si el desplazamiento que se hace de la carta
+     * es hacia la derecha, la película se añade automáticamente a
+     * nuestra lista de seguimiento.
+     *
+     * También se realiza la carga de las películas en el objeto correspondiente
+     * y se inicializa la información del view correspondiente a las cartas con
+     * este mismo objeto.
+     */
     @RequiresApi(Build.VERSION_CODES.KITKAT)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +54,7 @@ class PeliculasRelacionadas : AppCompatActivity() {
                 //NADA
             }
 
+            @RequiresApi(Build.VERSION_CODES.M)
             override fun onCardVanish(index: Int, type: SwipeCardsView.SlideType?) {
                 if (type == SwipeCardsView.SlideType.RIGHT) {
                     //Incluir película en peliculas que le gustan al usuario
@@ -72,6 +87,10 @@ class PeliculasRelacionadas : AppCompatActivity() {
                                     Log.i("STATUS", res.getString("status_message"))
                                 }
                             })
+                }
+                if(index == listaPelis.size-1){
+                    var textonoquedamas = findViewById<TextView>(R.id.noquedamas)
+                    textonoquedamas.setTextColor(getColor(R.color.black))
                 }
             }
 
@@ -118,9 +137,9 @@ class PeliculasRelacionadas : AppCompatActivity() {
                         vectorPeliculasRelacionadasJSON.getJSONObject(i).getString("id"))
             }
 
-            getData()
+            estableceAdaptador()
         }
-        else if(vectorPeliculasRelacionadasJSON.length() > 0){
+        else{
             for(i in 0 until vectorPeliculasRelacionadasJSON.length()){
                 imagenesPeliSeleccionada = ""
                 solicitarImagenes(vectorPeliculasRelacionadasJSON.getJSONObject(i).getInt("id"))
@@ -137,22 +156,31 @@ class PeliculasRelacionadas : AppCompatActivity() {
                         vectorPeliculasRelacionadasJSON.getJSONObject(i).getString("id"))
             }
 
-            getData()
-        }
-        else{
-
+            estableceAdaptador()
         }
     }
 
-    fun getData(){
+    /**
+     * Función para establecer el adaptador de las cartas de las
+     * peliculas
+     */
+    fun estableceAdaptador(){
         var adaptador = Adaptador(listaPelis,this)
         cartas!!.setAdapter(adaptador)
     }
 
+    /**
+     * Función para insertar una película dentro de la lista que se pasará
+     * posteriormente al adaptador para la creación de cartas.
+     */
     fun insertarPeliculaLista(titulo: String, imagen: String, idPeli: String){
         listaPelis += Pelicula(titulo, imagen, idPeli)
     }
 
+    /**
+     * Función que solicita las imágenes de la película seleccionada,
+     * para mostrarla posteriormente en la carta
+     */
     fun solicitarImagenes(idPeli: Int){
         val request = Request.Builder()
                 .url("https://api.themoviedb.org/3/movie/$idPeli/images?api_key=ecfe4f06a0f028c3618838df92bfea77")

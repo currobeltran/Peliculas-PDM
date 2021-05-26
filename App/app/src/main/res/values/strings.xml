@@ -52,4 +52,8 @@
     <string name="seleccionsup">Seleccione último dígito límite superior</string>
 
     <string name="listadeseguimiento">In watchlist</string>
+    <string name="megusta">Me gusta</string>
+    <string name="nomegusta">No me gusta</string>
+    <string name="anadirwatchlist">Añadir a lista de seguimiento</string>
+    <string name="nomasmostrar">No hay nada que mostrar</string>
 </resources>

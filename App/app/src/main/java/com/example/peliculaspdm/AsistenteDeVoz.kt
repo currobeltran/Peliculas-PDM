@@ -34,6 +34,10 @@ class AsistenteDeVoz : AppCompatActivity() {
         obtenerIdsGeneros()
     }
 
+    /**
+     * Al iniciar la actividad, se reproduce un mensaje de bienvenida
+     * al usuario y se mencionan los géneros disponibles.
+     */
     override fun onStart() {
         super.onStart()
         reproductor = TextToSpeech(this, object: TextToSpeech.OnInitListener {
@@ -47,8 +51,12 @@ class AsistenteDeVoz : AppCompatActivity() {
         })
     }
 
-    // This callback is invoked when the Speech Recognizer returns.
-    // This is where you process the intent and extract the speech text from the intent.
+    /**
+     * Esta función controlará parte del proceso, ya que cada vez que el usuario
+     * diga algo por el micrófono, este evento será el encargado de procesar
+     * lo que ha dicho además de iniciar la función correspondiente dependiendo
+     * del estado en el que se encuentre la aplicación
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SPEECH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -81,6 +89,9 @@ class AsistenteDeVoz : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    /**
+     * Función asignada al botón con el que el usuario puede hablar al asistente
+     */
     fun pulsaParaHablar(v: View){
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
@@ -89,6 +100,9 @@ class AsistenteDeVoz : AppCompatActivity() {
         startActivityForResult(intent, SPEECH_REQUEST_CODE)
     }
 
+    /**
+     * Función donde el asistente menciona los géneros disponibles para elegir
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun decirGeneros(){
         reproductor!!.speak("Dígame uno de los siguientes géneros",TextToSpeech.QUEUE_ADD, null, "")
@@ -104,6 +118,10 @@ class AsistenteDeVoz : AppCompatActivity() {
 
     }
 
+    /**
+     * Función donde el asistente reconoce qué género se ha dicho, y realiza una
+     * pregunta de confirmación al usuario.
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun eleccionGenero(spokenText: String) {
         var JSONGeneros = JSONObject(generosAPI).getJSONArray("genres")
@@ -159,6 +177,14 @@ class AsistenteDeVoz : AppCompatActivity() {
         }
     }
 
+    /**
+     * Función para confirmar el género escogido.
+     *
+     * Si se dice si, se pasa a seleccionar el siguiente parámetro.
+     *
+     * En caso contrario, se repiten de nuevo los géneros para que
+     * el usuario pueda seleccionar otro.
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun confirmarGenero(spokenText: String){
         when(spokenText){
@@ -173,11 +199,19 @@ class AsistenteDeVoz : AppCompatActivity() {
         }
     }
 
+    /**
+     * Función donde el asistente pregunta al usuario el año del que
+     * desea las películas
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun preguntarAnio(){
         reproductor!!.speak("Diga ahora el año del que desea la película", TextToSpeech.QUEUE_ADD, null, "")
     }
 
+    /**
+     * Función para procesar y confirmar el año dicho por el usuario
+     * para ser establecido como parámetro en la búsqueda de películas
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun obtenerAnio(spokenText: String){
         if(!comprobarValidezAnio(spokenText)){
@@ -191,6 +225,12 @@ class AsistenteDeVoz : AppCompatActivity() {
         }
     }
 
+    /**
+     * Función que comprueba si un string se puede convertir a
+     * entero.
+     *
+     * Se utilizará al procesar el año que haya dicho el usuario
+     */
     fun comprobarValidezAnio(anio: String): Boolean {
         return try {
             anio.toInt()
@@ -200,6 +240,12 @@ class AsistenteDeVoz : AppCompatActivity() {
         }
     }
 
+    /**
+     * Función para confirmar el año dicho por el usuario.
+     *
+     * Si la respuesta es afirmativa, se pasa al estado siguiente,
+     * si no, se vuelve a preguntar por un año en concreto.
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun confirmarAnio(spokenText: String){
         when(spokenText){
@@ -214,11 +260,18 @@ class AsistenteDeVoz : AppCompatActivity() {
         }
     }
 
+    /**
+     * Se pregunta al usuario si se desea una película conocida o no.
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun preguntarPopularidad(){
         reproductor!!.speak("Por último, ¿desea una película conocida?", TextToSpeech.QUEUE_ADD, null, "")
     }
 
+    /**
+     * Se pregunta al usuario si desea confirmar su elección de
+     * popularidad.
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun obtenerPopularidad(spokenText: String){
         when(spokenText){
@@ -238,6 +291,13 @@ class AsistenteDeVoz : AppCompatActivity() {
         }
     }
 
+    /**
+     * Función para confirmar la popularidad de la película
+     * dicha por el usuario.
+     *
+     * Si la respuesta es afirmativa, se pasa al estado siguiente,
+     * si no, se vuelve a preguntar por un año en concreto.
+     */
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     fun confirmarPopular(spokenText: String){
         when(spokenText){
@@ -271,6 +331,9 @@ class AsistenteDeVoz : AppCompatActivity() {
         }
     }
 
+    /**
+     * Función para obtener los IDs correspondientes a los géneros dentro de la API.
+     */
     fun obtenerIdsGeneros(){
         val request = Request.Builder()
                 .url("https://api.themoviedb.org/3/genre/movie/list?api_key=ecfe4f06a0f028c3618838df92bfea77")
@@ -290,6 +353,10 @@ class AsistenteDeVoz : AppCompatActivity() {
                 })
     }
 
+    /**
+     * Al finalizar el proceso, se realiza una petición de las películas
+     * según los parámetros seleccionados.
+     */
     fun peticionPeliculas(){
         var request: Request? = null
 

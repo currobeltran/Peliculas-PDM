@@ -13,6 +13,12 @@ import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException
 
+/**
+ * Actividad de búsqueda de películas
+ *
+ * Se seleccionan una serie de parámetros y a partir de
+ * estos se seleccionan una serie de películas al azar.
+ */
 class ObtenerRecomendacion2 : AppCompatActivity(){
     var currentLayout = -1
     var generos: String? = null
@@ -39,6 +45,20 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
         currentLayout = R.layout.activity_obtener_recomendacion2
     }
 
+    /**
+     * Función que, dependiendo del botón pulsado, realizará una acción
+     * u otra.
+     *
+     * Cada vez que se pulse un botón de parámetro (genero, época, puntuación min.)
+     * se abrirá un layout distinto donde aparecerán las distintas opciones para
+     * modificar el parámetro en cuestión
+     *
+     * Si en cambio, se pulsa aceptar dentro de estos layouts mencionados, se guardan
+     * las modificaciones realizadas en esta pantalla y se vuelve al layout original
+     * donde se podrá seleccionar otro parámetro a modificar. También existe el botón
+     * de cancelar que, a diferencia de aceptar, no guarda las últimas modificaciones
+     * realizadas.
+     */
     fun botonParametroPulsado(v: View){
         when(currentLayout) {
             R.layout.activity_obtener_recomendacion2 -> {
@@ -144,6 +164,11 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
         }
     }
 
+    /**
+     * Función que procesa los parámetros seleccionados y obtiene las
+     * distintas películas que se van a mostrar, para en último lugar,
+     * iniciar la actividad donde se mostrarán en forma de cartas.
+     */
     @SuppressLint("InflateParams")
     fun verPeliculasRelacionadas(v: View){
         val grupoRadio = findViewById<RadioGroup>(R.id.grouppopularidad)
@@ -165,6 +190,8 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
         var inflateView = layoutInflater.inflate(R.layout.mostrargeneros, null)
         for(element2 in listageneros){
             var elementoCheck = inflateView.findViewById<CheckBox>(element2.toInt())
+            //Dependiendo del elemento, se coge un ID u otro para realizar la petición
+            //posteriormente
             when(elementoCheck.text){
                 "Drama" -> {
                     generosSolicitados += "${generosAPIJSON.getJSONObject(6).getString("id")},"
@@ -224,6 +251,10 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
         startActivity(intentPeliculasRelacionadas)
     }
 
+    /**
+     * Función para obtener los IDs de los géneros correspondientes a
+     * los géneros dentro de la API
+     */
     fun obtenerIdsGeneros(){
         val request = Request.Builder()
                 .url("https://api.themoviedb.org/3/genre/movie/list?api_key=ecfe4f06a0f028c3618838df92bfea77")
@@ -243,6 +274,9 @@ class ObtenerRecomendacion2 : AppCompatActivity(){
                 })
     }
 
+    /**
+     * Función para obtener las películas según los parámetros seleccionados.
+     */
     fun peticionPeliculas(){
         var request: Request? = null
         val anioHastaCompleto = decadaHasta + anioHasta

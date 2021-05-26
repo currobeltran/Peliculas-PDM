@@ -18,9 +18,14 @@ class ValorarPelicula : AppCompatActivity() {
     var pelicula: JSONObject = JSONObject()
     var imagen: String = ""
     var idSesion: String = ""
-    var idLista: Int = -1
     var idCuenta: Int = -1
 
+    /**
+     * En esta función se inicializa toda la información
+     * correspondiente a la película que se desea visualizar,
+     * poniendo dichos datos en el elemento de la interfaz
+     * correspondiente.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_valorar_pelicula)
@@ -41,21 +46,23 @@ class ValorarPelicula : AppCompatActivity() {
 
         idSesion = intent.getStringExtra("IDSESION")!!
 
-        idLista = intent.getIntExtra("IDLISTA", -1)
-
         idCuenta = intent.getIntExtra("IDCUENTA", -1)
     }
 
     fun volverAtras(view: View){
-        val activityInicio = Intent(this, MainActivity::class.java)
+        val activityInicio = Intent(this, ListadoPeliculas::class.java)
         activityInicio.putExtra("IDCUENTA", idCuenta)
         activityInicio.putExtra("IDSESION", idSesion)
         val requestToken = intent.getStringExtra("TOKEN")
-        activityInicio.putExtra("RequestToken", requestToken)
+        activityInicio.putExtra("TOKEN", requestToken)
 
         startActivity(activityInicio)
     }
 
+    /**
+     * Función asignada a los dos botones (me gusta/no me gusta)
+     * pertenecientes a esta pantalla.
+     */
     fun valoracionPelicula(view: View){
         val idBoton = view.id
 
@@ -67,6 +74,10 @@ class ValorarPelicula : AppCompatActivity() {
         }
     }
 
+    /**
+     * Se añade una pelicula a la lista de me gusta
+     * almacenada en la base de datos de la API
+     */
     fun anadePeliculaListaMeGusta(){
         val idPeli = pelicula.getString("id")
         val requestBody = FormBody.Builder()
@@ -99,6 +110,10 @@ class ValorarPelicula : AppCompatActivity() {
                 })
     }
 
+    /**
+     * Se añade una película a la lista de no me gusta
+     * almacenada en la base de datos local de la aplicación
+     */
     fun anadePeliculaListaNoMeGusta(){
         var dbHelper = MyDbHelper(this)
         var sqliteBD = dbHelper.writableDatabase
